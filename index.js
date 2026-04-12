@@ -6,10 +6,22 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const session = require("express-session");
 const SequelizeStore = require("connect-session-sequelize");
+const setupAssociations = require('./models/associations');
 
+setupAssociations();
 const ResponseRoute = require("./routes/ResponseRoute.js");
 const AuthRoute = require("./routes/AuthRoute.js");
 const UserRoute = require("./routes/UserRoute.js");
+const PegawaiRoute = require("./routes/PegawaiRoute.js");
+const KepegawaianRoute = require("./routes/KepegawaianRoute.js");
+const PangkatRoute = require("./routes/PangkatRoute.js");
+const AlamatRoute = require("./routes/AlamatRoute.js");
+const AnakRoute = require("./routes/AnakRoute.js");
+const FisikRoute = require("./routes/FisikRoute.js");
+const PendidikanRoute = require("./routes/PendidikanRoute.js");
+const PasanganRoute = require("./routes/PasanganRoute.js");
+const RekeningRoute = require("./routes/RekeningRoute.js");
+const UkuranRoute = require("./routes/UkuranRoute.js");
 
 dotenv.config();
 const app = express();
@@ -82,6 +94,16 @@ app.use(express.json());
 app.use(ResponseRoute);
 app.use(AuthRoute);
 app.use(UserRoute);
+app.use(PegawaiRoute);
+app.use(KepegawaianRoute);
+app.use(PangkatRoute);
+app.use(AlamatRoute);
+app.use(AnakRoute);
+app.use(FisikRoute);
+app.use(PendidikanRoute);
+app.use(PasanganRoute);
+app.use(RekeningRoute);
+app.use(UkuranRoute);
 
 // Error handling untuk CORS
 app.use((err, req, res, next) => {
