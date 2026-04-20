@@ -73,7 +73,8 @@ const createRekening = async (req, res) => {
             idPegawai: idPegawai,
             nomorRekGaji: nomorRekGaji,
             namaBank: namaBank,
-            kantorCabang: kantorCabang
+            kantorCabang: kantorCabang,
+            userId: req.userId
         });
 
         res.json({ msg: "Rekening Created" });

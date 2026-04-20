@@ -69,7 +69,8 @@ const createPasangan = async (req, res) => {
 
         await Pasangan.create({
             idPegawai: idPegawai,
-            namaPasangan: namaPasangan
+            namaPasangan: namaPasangan,
+            userId: req.userId
         });
 
         res.json({ msg: "Pasangan Created" });

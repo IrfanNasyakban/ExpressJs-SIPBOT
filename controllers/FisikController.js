@@ -81,7 +81,8 @@ const createFisik = async (req, res) => {
             warnaRambut: warnaRambut,
             bentukWajah: bentukWajah,
             warnaKulit: warnaKulit,
-            ciriKhusus: ciriKhusus
+            ciriKhusus: ciriKhusus,
+            userId: req.userId
         });
 
         res.json({ msg: "Fisik Created" });

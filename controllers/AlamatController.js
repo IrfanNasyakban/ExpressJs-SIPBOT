@@ -1,5 +1,6 @@
 const Alamat = require("../models/AlamatModel.js");
 const Users = require("../models/UserModel.js");
+const Pegawai = require("../models/PegawaiModel.js");
 
 const getAllAlamat = async (req, res) => {
     try {
@@ -22,6 +23,9 @@ const getAlamat = async (req, res) => {
                 include: [{
                     model: Users,
                     attributes: ['username', 'email', 'role']
+                }, {
+                    model: Pegawai,
+                    attributes: ['namaDenganGelar']
                 }],
             });
             res.status(200).json(response);
@@ -71,7 +75,8 @@ const createAlamat = async (req, res) => {
         await Alamat.create({
             idPegawai: idPegawai,
             alamatKTP: alamatKTP,
-            alamatDomisili: alamatDomisili
+            alamatDomisili: alamatDomisili,
+            userId: req.userId
         });
 
         res.json({ msg: "Alamat Created" });

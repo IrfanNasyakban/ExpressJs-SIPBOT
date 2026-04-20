@@ -69,7 +69,8 @@ const createAnak = async (req, res) => {
 
         await Anak.create({
             idPegawai: idPegawai,
-            namaAnak: namaAnak
+            namaAnak: namaAnak,
+            userId: req.userId
         });
 
         res.json({ msg: "Anak Created" });

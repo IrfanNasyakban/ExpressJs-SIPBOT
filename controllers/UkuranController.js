@@ -73,7 +73,8 @@ const createUkuran = async (req, res) => {
             idPegawai: idPegawai,
             ukuranPadDivamot: ukuranPadDivamot,
             ukuranSepatu: ukuranSepatu,
-            ukuranTopi: ukuranTopi
+            ukuranTopi: ukuranTopi,
+            userId: req.userId
         });
 
         res.json({ msg: "Ukuran Created" });

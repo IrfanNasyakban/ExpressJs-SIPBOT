@@ -75,7 +75,8 @@ const createIdentitas = async (req, res) => {
             nik: nik,
             nomorKK: nomorKK,
             nomorBPJS: nomorBPJS,
-            nomorTaspen: nomorTaspen
+            nomorTaspen: nomorTaspen,
+            userId: req.userId
         });
 
         res.json({ msg: "Identitas Created" });

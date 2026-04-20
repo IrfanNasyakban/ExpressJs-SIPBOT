@@ -1,5 +1,6 @@
 const Kepegawaian = require("../models/KepegawaianModel.js");
 const Users = require("../models/UserModel.js");
+const Pegawai = require("../models/PegawaiModel.js");
 
 const getAllKepegawaian = async (req, res) => {
     try {
@@ -22,6 +23,9 @@ const getKepegawaian = async (req, res) => {
                 include: [{
                     model: Users,
                     attributes: ['username', 'email', 'role']
+                }, {
+                    model: Pegawai,
+                    attributes: ['namaDenganGelar']
                 }],
             });
             res.status(200).json(response);
@@ -83,7 +87,8 @@ const createKepegawaian = async (req, res) => {
             eselon: eselon,
             angkatanPejim: angkatanPejim,
             ppns: ppns,
-            tmtPensiun: tmtPensiun
+            tmtPensiun: tmtPensiun,
+            userId: req.userId
         });
 
         res.json({ msg: "Kepegawaian Created" });

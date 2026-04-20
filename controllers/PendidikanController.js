@@ -69,7 +69,8 @@ const createPendidikan = async (req, res) => {
 
         await Pendidikan.create({
             idPegawai: idPegawai,
-            pendidikanTerakhir: pendidikanTerakhir
+            pendidikanTerakhir: pendidikanTerakhir,
+            userId: req.userId
         });
 
         res.json({ msg: "Pendidikan Created" });

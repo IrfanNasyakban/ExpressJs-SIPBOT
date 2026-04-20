@@ -1,5 +1,6 @@
 const Pangkat = require("../models/PangkatModel.js");
 const Users = require("../models/UserModel.js");
+const Pegawai = require("../models/PegawaiModel.js");
 
 const getAllPangkat = async (req, res) => {
     try {
@@ -22,6 +23,9 @@ const getPangkat = async (req, res) => {
                 include: [{
                     model: Users,
                     attributes: ['username', 'email', 'role']
+                }, {
+                    model: Pegawai,
+                    attributes: ['namaDenganGelar']
                 }],
             });
             res.status(200).json(response);
@@ -81,7 +85,8 @@ const createPangkat = async (req, res) => {
             nomorSKPangkat: nomorSKPangkat,
             SKPangkatDari: SKPangkatDari,
             uraianSKPangkat: uraianSKPangkat,
-            tmtPangkat: tmtPangkat
+            tmtPangkat: tmtPangkat,
+            userId: req.userId
         });
 
         res.json({ msg: "Pangkat Created" });
