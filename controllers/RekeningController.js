@@ -1,5 +1,6 @@
 const Rekening = require("../models/RekeningModel.js");
 const Users = require("../models/UserModel.js");
+const Pegawai = require("../models/PegawaiModel.js");
 
 const getAllRekening = async (req, res) => {
     try {
@@ -7,6 +8,9 @@ const getAllRekening = async (req, res) => {
             include: [{
                 model: Users,
                 attributes: ['username', 'email', 'role']
+            }, {
+                model: Pegawai,
+                attributes: ['namaDenganGelar']
             }],
         });
         res.status(200).json(response);
@@ -22,6 +26,9 @@ const getRekening = async (req, res) => {
                 include: [{
                     model: Users,
                     attributes: ['username', 'email', 'role']
+                }, {
+                    model: Pegawai,
+                    attributes: ['namaDenganGelar']
                 }],
             });
             res.status(200).json(response);
@@ -38,14 +45,17 @@ const getRekeningById = async (req, res) => {
         let response;
         if (req.role === "admin") {
             response = await Rekening.findOne({
-                attributes: ['id', 'idPegawaian', 'nomorRekGaji', 'namaBank', 'kantorCabang'],
+                attributes: ['id', 'idPegawai', 'nomorRekGaji', 'namaBank', 'kantorCabang'],
                 where: {
                     id: req.params.id
                 },
                 include: [{
                     model: Users,
                     attributes: ['username', 'email']
-                }]
+                }, {
+                    model: Pegawai,
+                    attributes: ['namaDenganGelar', 'nip']
+                }],
             })
         } else {
             res.status(422).json(msg="Akses hanya untuk admin");

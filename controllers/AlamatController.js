@@ -8,6 +8,9 @@ const getAllAlamat = async (req, res) => {
             include: [{
                 model: Users,
                 attributes: ['username', 'email', 'role']
+            }, {
+                model: Pegawai,
+                attributes: ['namaDenganGelar']
             }],
         });
         res.status(200).json(response);
@@ -42,13 +45,16 @@ const getAlamatById = async (req, res) => {
         let response;
         if (req.role === "admin") {
             response = await Alamat.findOne({
-                attributes: ['id', 'idPegawaian', 'alamatKTP', 'alamatDomisili'],
+                attributes: ['id', 'idPegawai', 'alamatKTP', 'alamatDomisili'],
                 where: {
                     id: req.params.id
                 },
                 include: [{
                     model: Users,
                     attributes: ['username', 'email']
+                }, {
+                    model: Pegawai,
+                    attributes: ['namaDenganGelar', 'nip']
                 }]
             })
         } else {

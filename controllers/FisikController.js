@@ -1,5 +1,6 @@
 const Fisik = require("../models/FisikModel.js");
 const Users = require("../models/UserModel.js");
+const Pegawai = require("../models/PegawaiModel.js");
 
 const getAllFisik = async (req, res) => {
     try {
@@ -7,6 +8,9 @@ const getAllFisik = async (req, res) => {
             include: [{
                 model: Users,
                 attributes: ['username', 'email', 'role']
+            }, {
+                model: Pegawai,
+                attributes: ['namaDenganGelar']
             }],
         });
         res.status(200).json(response);
@@ -22,6 +26,9 @@ const getFisik = async (req, res) => {
                 include: [{
                     model: Users,
                     attributes: ['username', 'email', 'role']
+                }, {
+                    model: Pegawai,
+                    attributes: ['namaDenganGelar']
                 }],
             });
             res.status(200).json(response);
@@ -38,13 +45,16 @@ const getFisikById = async (req, res) => {
         let response;
         if (req.role === "admin") {
             response = await Fisik.findOne({
-                attributes: ['id', 'idPegawaian', 'tinggiBadan', 'beratBadan', 'jenisRambut', 'warnaRambut', 'bentukWajah', 'warnaKulit', 'ciriKhusus'],
+                attributes: ['id', 'idPegawai', 'tinggiBadan', 'beratBadan', 'jenisRambut', 'warnaRambut', 'bentukWajah', 'warnaKulit', 'ciriKhusus'],
                 where: {
                     id: req.params.id
                 },
                 include: [{
                     model: Users,
                     attributes: ['username', 'email']
+                }, {
+                    model: Pegawai,
+                    attributes: ['namaDenganGelar', 'nip']
                 }]
             })
         } else {

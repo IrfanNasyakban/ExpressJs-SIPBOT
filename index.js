@@ -24,6 +24,8 @@ const PasanganRoute = require("./routes/PasanganRoute.js");
 const RekeningRoute = require("./routes/RekeningRoute.js");
 const UkuranRoute = require("./routes/UkuranRoute.js");
 
+const ChatbotRoute = require("./routes/ChatbotRoute.js");
+
 dotenv.config();
 const app = express();
 
@@ -106,6 +108,7 @@ app.use(PendidikanRoute);
 app.use(PasanganRoute);
 app.use(RekeningRoute);
 app.use(UkuranRoute);
+app.use('/api/chatbot', ChatbotRoute);
 
 // Error handling untuk CORS
 app.use((err, req, res, next) => {

@@ -1,5 +1,6 @@
 const Ukuran = require("../models/UkuranModel.js");
 const Users = require("../models/UserModel.js");
+const Pegawai = require("../models/PegawaiModel.js");
 
 const getAllUkuran = async (req, res) => {
     try {
@@ -7,6 +8,9 @@ const getAllUkuran = async (req, res) => {
             include: [{
                 model: Users,
                 attributes: ['username', 'email', 'role']
+            }, {
+                model: Pegawai,
+                attributes: ['namaDenganGelar']
             }],
         });
         res.status(200).json(response);
@@ -22,6 +26,9 @@ const getUkuran = async (req, res) => {
                 include: [{
                     model: Users,
                     attributes: ['username', 'email', 'role']
+                }, {
+                    model: Pegawai,
+                    attributes: ['namaDenganGelar']
                 }],
             });
             res.status(200).json(response);
@@ -38,13 +45,16 @@ const getUkuranById = async (req, res) => {
         let response;
         if (req.role === "admin") {
             response = await Ukuran.findOne({
-                attributes: ['id', 'idPegawaian', 'ukuranPadDivamot', 'ukuranSepatu', 'ukuranTopi'],
+                attributes: ['id', 'idPegawai', 'ukuranPadDivamot', 'ukuranSepatu', 'ukuranTopi'],
                 where: {
                     id: req.params.id
                 },
                 include: [{
                     model: Users,
                     attributes: ['username', 'email']
+                }, {
+                    model: Pegawai,
+                    attributes: ['namaDenganGelar', 'nip']
                 }]
             })
         } else {

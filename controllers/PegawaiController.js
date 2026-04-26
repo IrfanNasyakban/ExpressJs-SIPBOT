@@ -1,5 +1,15 @@
 const Pegawai = require("../models/PegawaiModel.js");
 const Users = require("../models/UserModel.js");
+const Alamat = require("../models/AlamatModel.js");
+const Anak = require("../models/AnakModel.js");
+const Fisik = require("../models/FisikModel.js");
+const Identitas = require("../models/IdentitasModel.js");
+const Kepegawaian = require("../models/KepegawaianModel.js");
+const Pangkat = require("../models/PangkatModel.js");
+const Pasangan = require("../models/PasanganModel.js");
+const Pendidikan = require("../models/PendidikanModel.js");
+const Rekening = require("../models/RekeningModel.js");
+const Ukuran = require("../models/UkuranModel.js");
 
 const getAllPegawai = async (req, res) => {
     try {
@@ -7,6 +17,36 @@ const getAllPegawai = async (req, res) => {
             include: [{
                 model: Users,
                 attributes: ['username', 'email', 'role']
+            }, {
+                model: Alamat,
+                attributes: ['alamatKTP', 'alamatDomisili'],
+            }, {
+                model: Anak,
+                attributes: ['namaAnak'],
+            }, { 
+                model: Fisik,
+                attributes: ['tinggiBadan', 'beratBadan', 'jenisRambut', 'warnaRambut', 'bentukWajah', 'warnaKulit', 'ciriKhusus'],
+            }, {
+                model: Identitas,
+                attributes: ['nik', 'nomorKK', 'nomorBPJS', 'nomorTaspen'],
+            }, {
+                model: Kepegawaian,
+                attributes: ['statusKepegawaian', 'jabatan', 'tmtJabatan', 'bagianKerja', 'eselon', 'angkatanPejim', 'ppns', 'tmtPensiun'],
+            }, {
+                model: Pangkat,
+                attributes: ['pangkat', 'golonganRuang', 'tanggalSKPangkat', 'nomorSKPangkat', 'SKPangkatDari', 'uraianSKPangkat', 'tmtPangkat'],
+            }, {
+                model: Pasangan,
+                attributes: ['namaPasangan'],
+            }, {
+                model: Pendidikan,
+                attributes: ['pendidikanTerakhir'],
+            }, {
+                model: Rekening,
+                attributes: ['nomorRekGaji', 'namaBank', 'kantorCabang'],
+            }, {
+                model: Ukuran,
+                attributes: ['ukuranPadDivamot', 'ukuranSepatu', 'ukuranTopi'],
             }],
         });
         res.status(200).json(response);

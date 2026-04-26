@@ -8,6 +8,9 @@ const getAllPangkat = async (req, res) => {
             include: [{
                 model: Users,
                 attributes: ['username', 'email', 'role']
+            }, {
+                model: Pegawai,
+                attributes: ['namaDenganGelar']
             }],
         });
         res.status(200).json(response);
@@ -42,13 +45,16 @@ const getPangkatById = async (req, res) => {
         let response;
         if (req.role === "admin") {
             response = await Pangkat.findOne({
-                attributes: ['id', 'idPegawaian', 'pangkat', 'golonganRuang', 'tanggalSKPangkat', 'nomorSKPangkat', 'SKPangkatDari', 'uraianSKPangkat', 'tmtPangkat'],
+                attributes: ['id', 'idPegawai', 'pangkat', 'golonganRuang', 'tanggalSKPangkat', 'nomorSKPangkat', 'SKPangkatDari', 'uraianSKPangkat', 'tmtPangkat'],
                 where: {
                     id: req.params.id
                 },
                 include: [{
                     model: Users,
                     attributes: ['username', 'email']
+                }, {
+                    model: Pegawai,
+                    attributes: ['namaDenganGelar', 'nip']
                 }]
             })
         } else {

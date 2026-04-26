@@ -1,5 +1,6 @@
 const Pasangan = require("../models/PasanganModel.js");
 const Users = require("../models/UserModel.js");
+const Pegawai = require("../models/PegawaiModel.js");
 
 const getAllPasangan = async (req, res) => {
     try {
@@ -7,6 +8,9 @@ const getAllPasangan = async (req, res) => {
             include: [{
                 model: Users,
                 attributes: ['username', 'email', 'role']
+            }, {
+                model: Pegawai,
+                attributes: ['namaDenganGelar']
             }],
         });
         res.status(200).json(response);
@@ -22,6 +26,9 @@ const getPasangan = async (req, res) => {
                 include: [{
                     model: Users,
                     attributes: ['username', 'email', 'role']
+                }, {
+                    model: Pegawai,
+                    attributes: ['namaDenganGelar']
                 }],
             });
             res.status(200).json(response);
@@ -38,13 +45,16 @@ const getPasanganById = async (req, res) => {
         let response;
         if (req.role === "admin") {
             response = await Pasangan.findOne({
-                attributes: ['id', 'idPegawaian', 'namaPasangan'],
+                attributes: ['id', 'idPegawai', 'namaPasangan'],
                 where: {
                     id: req.params.id
                 },
                 include: [{
                     model: Users,
                     attributes: ['username', 'email']
+                }, {
+                    model: Pegawai,
+                    attributes: ['namaDenganGelar', 'nip']
                 }]
             })
         } else {

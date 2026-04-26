@@ -8,6 +8,9 @@ const getAllKepegawaian = async (req, res) => {
             include: [{
                 model: Users,
                 attributes: ['username', 'email', 'role']
+            }, {
+                model: Pegawai,
+                attributes: ['namaDenganGelar']
             }],
         });
         res.status(200).json(response);
@@ -42,13 +45,16 @@ const getKepegawaianById = async (req, res) => {
         let response;
         if (req.role === "admin") {
             response = await Kepegawaian.findOne({
-                attributes: ['id', 'idPegawaian', 'statusKepegawaian', 'jabatan', 'tmtJabatan', 'bagianKerja', 'eselon', 'angkatanPejim', 'ppns', 'tmtPensiun'],
+                attributes: ['id', 'idPegawai', 'statusKepegawaian', 'jabatan', 'tmtJabatan', 'bagianKerja', 'eselon', 'angkatanPejim', 'ppns', 'tmtPensiun'],
                 where: {
                     id: req.params.id
                 },
                 include: [{
                     model: Users,
                     attributes: ['username', 'email']
+                }, {
+                    model: Pegawai,
+                    attributes: ['namaDenganGelar', 'nip']
                 }]
             })
         } else {
