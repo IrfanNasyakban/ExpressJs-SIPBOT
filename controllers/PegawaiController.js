@@ -85,7 +85,37 @@ const getPegawaiById = async (req, res) => {
                 include: [{
                     model: Users,
                     attributes: ['username', 'email']
-                }]
+                }, {
+                model: Alamat,
+                attributes: ['alamatKTP', 'alamatDomisili'],
+            }, {
+                model: Anak,
+                attributes: ['namaAnak'],
+            }, { 
+                model: Fisik,
+                attributes: ['tinggiBadan', 'beratBadan', 'jenisRambut', 'warnaRambut', 'bentukWajah', 'warnaKulit', 'ciriKhusus'],
+            }, {
+                model: Identitas,
+                attributes: ['nik', 'nomorKK', 'nomorBPJS', 'nomorTaspen'],
+            }, {
+                model: Kepegawaian,
+                attributes: ['statusKepegawaian', 'jabatan', 'tmtJabatan', 'bagianKerja', 'eselon', 'angkatanPejim', 'ppns', 'tmtPensiun'],
+            }, {
+                model: Pangkat,
+                attributes: ['pangkat', 'golonganRuang', 'tanggalSKPangkat', 'nomorSKPangkat', 'SKPangkatDari', 'uraianSKPangkat', 'tmtPangkat'],
+            }, {
+                model: Pasangan,
+                attributes: ['namaPasangan'],
+            }, {
+                model: Pendidikan,
+                attributes: ['pendidikanTerakhir'],
+            }, {
+                model: Rekening,
+                attributes: ['nomorRekGaji', 'namaBank', 'kantorCabang'],
+            }, {
+                model: Ukuran,
+                attributes: ['ukuranPadDivamot', 'ukuranSepatu', 'ukuranTopi'],
+            }]
             })
         } else {
             res.status(422).json(msg="Akses hanya untuk admin");
@@ -119,7 +149,7 @@ const createPegawai = async (req, res) => {
             return res.status(400).json({ error: "User ID not found in the request" });
         }
 
-        await Pegawai.create({
+        const pegawai = await Pegawai.create({
             nip: nip,
             nama: nama,
             gelarDepan: gelarDepan,
@@ -137,9 +167,10 @@ const createPegawai = async (req, res) => {
             userId: req.userId
         });
 
-        res.json({ msg: "Pegawai Created" });
+        res.json({ msg: "Pegawai Created", id: pegawai.id });
     } catch (error) {
         console.log(error);
+        res.status(500).json({ error: "Failed to create pegawai" });
     }
 };
 
