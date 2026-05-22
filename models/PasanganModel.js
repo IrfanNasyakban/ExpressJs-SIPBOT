@@ -15,10 +15,7 @@ const Pasangan = db.define(
     },
     namaPasangan: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
+      allowNull: true,
     },
     userId: {
       type: DataTypes.INTEGER,

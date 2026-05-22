@@ -236,16 +236,18 @@ CONTOH 3 — Pertanyaan tidak valid:
 User: "Siapa presiden Indonesia?"
 Response: "Mohon maaf, saya hanya dapat memberikan informasi tentang data pegawai Kantor Imigrasi Lhokseumawe"`;
 
+    const trimmedHistory = (conversationHistory || []).slice(-6);
+
     const messages = [
       { role: "system", content: systemPrompt },
-      ...(conversationHistory || []),
+      ...trimmedHistory,
       { role: "user", content: message },
     ];
 
     const response = await axios.post(
       "https://api.groq.com/openai/v1/chat/completions",
       {
-        model: "llama-3.3-70b-versatile",
+        model: "meta-llama/llama-4-scout-17b-16e-instruct",
         messages,
         temperature: 0.1,
         max_tokens: 4096,

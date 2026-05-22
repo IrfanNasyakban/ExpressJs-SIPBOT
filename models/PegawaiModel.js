@@ -22,17 +22,11 @@ const Pegawai = db.define(
     },
     gelarDepan: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
+      allowNull: true,
     },
     gelarBelakang: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
+      allowNull: true,
     },
     namaDenganGelar: {
       type: DataTypes.STRING,
@@ -43,66 +37,54 @@ const Pegawai = db.define(
     },
     tempatLahir: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: {
         notEmpty: true,
       },
     },
     tanggalLahir: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       validate: {
         notEmpty: true,
       },
     },
     gender: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: {
         notEmpty: true,
       },
     },
     agama: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: {
         notEmpty: true,
       },
     },
     statusPegawai: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
       validate: {
         notEmpty: true,
       },
     },
     emailPribadi: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
+      allowNull: true,
     },
     emailDinas: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
+      allowNull: true,
     },
     noHp: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
+      allowNull: true,
     },
     hobi: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
+      allowNull: true,
     },
     userId: {
       type: DataTypes.INTEGER,

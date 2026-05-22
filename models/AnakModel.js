@@ -15,10 +15,7 @@ const Anak = db.define(
     },
     namaAnak: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
+      allowNull: true,
     },
     userId: {
       type: DataTypes.INTEGER,
